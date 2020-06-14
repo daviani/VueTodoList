@@ -1,14 +1,14 @@
 <template>
     <div class="card m-4 p-4 todo">
         <p> {{todo}} </p>
-        <div class="btn-delete btn btn-outline-danger"><strong>X</strong></div>
+        <div v-on:click="deleteItem" class="btn-delete btn btn-outline-danger"><strong>X</strong></div>
     </div>
 </template>
 
 <script>
     export default {
         name: 'Item',
-        props: ['todo', 'delete'],
+        props: ['todo', 'deleteItem'],
     };
 </script>
 <style scoped>

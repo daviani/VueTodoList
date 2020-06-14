@@ -5,14 +5,14 @@
         <form class="mt-4">
             <div class="form-group">
                 <label for="inputTodo" class="text-center">Saisir une tâche :</label>
-                <input id="inputTodo" type="text" class="form-control">
+                <input v-model="formData.todo" id="inputTodo" type="text" class="form-control">
             </div>
-            <div class="btn btn-outline-primary">Créer une tâche</div>
+            <button v-on:click.prevent="addItem" class="btn btn-outline-primary">Créer une tâche</button>
         </form>
 
         <ul class="todo mt-5">
             <li v-bind:key="index" v-for="(todo, index) in tableTodo">
-                <Item v-bind:todo="todo"/>
+                <Item :id="index" :todo="todo" :deleteItem="deleteItem"/>
             </li>
         </ul>
     </div>
@@ -31,6 +31,15 @@
                 tableTodo: ['5', '4', '3', '2', '1'],
             }
         },
+        methods: {
+            addItem: function () {
+                this.tableTodo.push(this.formData.todo);
+                this.formData.todo = '';
+            },
+            deleteItem: function (e) {
+                this.tableTodo.splice(e.target.parentNode.id, 1)
+            }
+        },
         components: {
             Item
         }
@@ -41,5 +50,6 @@
 <style>
     li {
         list-style: none;
+        padding: 0;
     }
 </style>
